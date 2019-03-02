@@ -11,4 +11,4 @@ $nvcc tf_nndistance_g.cu -c -o tf_nndistance_g.cu.o -std=c++11  -I $TF_INC -DGOO
  -x cu -Xcompiler -fPIC -O2 -D_GLIBCXX_USE_CXX11_ABI=0 
 
 g++ tf_nndistance.cpp tf_nndistance_g.cu.o -o tf_nndistance_so.so -std=c++11 -shared -fPIC -I $TF_INC \
--I$TF_INC/external/nsync/public -L$TF_LIB -ltensorflow_framework -lcudart -L $cudalib -D_GLIBCXX_USE_CXX11_ABI=0 
+-I$TF_INC/external/nsync/public -L$TF_LIB -L/home/peterzhefu/venv/lib/python2.7/site-packages/tensorflow -lcudart -L $cudalib -D_GLIBCXX_USE_CXX11_ABI=0 

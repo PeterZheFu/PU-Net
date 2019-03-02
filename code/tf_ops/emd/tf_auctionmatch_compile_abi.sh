@@ -8,4 +8,4 @@ $nvcc tf_auctionmatch_g.cu  -c -o tf_auctionmatch_g.cu.o -D_GLIBCXX_USE_CXX11_AB
  -x cu -Xcompiler -fPIC -O2 -arch=sm_30
 
 g++ tf_auctionmatch.cpp tf_auctionmatch_g.cu.o -o tf_auctionmatch_so.so -std=c++11 -shared -fPIC -I $TF_INC \
--I$TF_INC/external/nsync/public -L$TF_LIB -ltensorflow_framework -lcudart -L $cudalib -D_GLIBCXX_USE_CXX11_ABI=0  
+-I$TF_INC/external/nsync/public -L$TF_LIB -L/home/peterzhefu/venv/lib/python2.7/site-packages/tensorflow -lcudart -L $cudalib -D_GLIBCXX_USE_CXX11_ABI=0  
