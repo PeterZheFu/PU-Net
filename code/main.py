@@ -235,6 +235,7 @@ def prediction_whole_model(data_folder=None,show=False,use_normal=False):
 
             ##--------------visualize predicted point cloud----------------------
             path = os.path.join(save_path,item.split('/')[-1])
+            show = 1
             if show:
                 f,axis = plt.subplots(3)
                 axis[0].imshow(pc_util.point_cloud_three_views(input[0, :,0:3],diameter=5))
