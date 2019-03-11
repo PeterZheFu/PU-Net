@@ -195,8 +195,10 @@ def prediction_whole_model(data_folder=None,show=False,use_normal=False):
     if not os.path.exists(save_path):
         os.makedirs(save_path)
     samples = glob(data_folder + "/*.xyz")
+    print(samples)
     samples.sort(reverse=True)
-    input = np.loadtxt(samples[0])
+    input = np.loadtxt(samples[0], usecols=(0,1,2,3,4,5))
+    print(input)
 
     if use_normal:
         pointclouds_ipt = tf.placeholder(tf.float32, shape=(1, input.shape[0], 6))
@@ -215,9 +217,10 @@ def prediction_whole_model(data_folder=None,show=False,use_normal=False):
         saver.restore(sess, restore_model_path)
         samples = glob(data_folder+"/*.xyz")
         samples.sort()
+        print(samples)
         total_time = 0
         for i,item in enumerate(samples):
-            input = np.loadtxt(item)
+            input = np.loadtxt(item, usecols=(0,1,2,3,4,5))
             gt = input
 
             # input = data_provider.jitter_perturbation_point_cloud(np.expand_dims(input,axis=0),sigma=0.003,clip=0.006)
@@ -235,7 +238,7 @@ def prediction_whole_model(data_folder=None,show=False,use_normal=False):
 
             ##--------------visualize predicted point cloud----------------------
             path = os.path.join(save_path,item.split('/')[-1])
-            show = 1
+            
             if show:
                 f,axis = plt.subplots(3)
                 axis[0].imshow(pc_util.point_cloud_three_views(input[0, :,0:3],diameter=5))
