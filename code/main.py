@@ -14,7 +14,7 @@ from utils import pc_util
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--phase', default='test', help='train or test [default: train]')
-parser.add_argument('--gpu', default='1,2,3', help='GPU to use [default: GPU 3]')
+parser.add_argument('--gpu', default='3', help='GPU to use [default: GPU 3]')
 parser.add_argument('--log_dir', default='../model/generator2_new6', help='Log dir [default: log]')
 parser.add_argument('--num_point', type=int, default=1024,help='Point Number [1024/2048] [default: 1024]')
 parser.add_argument('--up_ratio',  type=int,  default=4,   help='Upsampling Ratio [default: 2]')
