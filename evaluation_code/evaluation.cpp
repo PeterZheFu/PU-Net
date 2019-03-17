@@ -31,7 +31,7 @@
 
 //we use multi-thread to accelerate the calculation
 //define the thread number here
-#define THREAD 4
+#define THREAD 11
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Surface_mesh<Kernel::Point_3> Triangle_mesh;
@@ -192,6 +192,9 @@ int main(int argc, char* argv[]){
   
   // calculate the point2surface distance for each predicted point
   for (int i=0;i<pred_cnt;i++){
+    if (i%1000 == 1) {
+      std::cout << "calculating point2surface distance for " << i << " out of total " << pred_cnt << " predicted points" << std::endl;
+    }
     // get the nearest point on the surface to the given point. Note the this point is represented as face location.
     Face_location location =  shortest_paths.locate<AABB_face_graph_traits>(pred_points[i],tree);
     pred_face_locations[i] = location;
@@ -203,7 +206,7 @@ int main(int argc, char* argv[]){
   }
   std::cout << "The point2surface distance:\n";
   calculate_mean_var(nearest_distance);
-  std::cout << "================================="<<std::endl;
+  std::cout << "==============end of calculate_mean_var==================="<<std::endl;
 
 
   //read the sampling position if have
@@ -278,7 +281,9 @@ int main(int argc, char* argv[]){
   sprintf(filename, "%s_density.xyz",prefix);
   std::ofstream density_output(filename);
   for (unsigned int i=0;i<density.size();i++){
+    std::cout << "Processing density of " << i;	  
     for (unsigned int j=0;j<density[i].size();j++){
+      std::cout << "processing density[" << i << "][" << j << "]" << std::endl;
       density[i][j]= density[i][j]*1.0/(pred_cnt*1.0*precentage[j]);
       //density[i][j]= density[i][j]*1.0/(M_PI*radius[j]*radius[j]);
       //density[i][j]= density[i][j]/(pred_cnt*1.0/total_area);
